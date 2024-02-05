@@ -7,10 +7,12 @@ export const CardWrapperCss = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  align-self: center;
   padding: 20px;
   width: auto;
   margin: 15px;
   box-shadow: 5px 5px 5px 5px #ccc;
+  max-width: 600px;
 `;
 
 export const IconCss = styled(FontAwesomeIcon)`
@@ -27,4 +29,8 @@ export const SectionCss = styled.section`
 export const RowCss = styled.p`
   padding: 5px;
   margin: 0;
+`;
+
+export const FlagIcon = styled.span`
+  font-size: 32px;
 `;

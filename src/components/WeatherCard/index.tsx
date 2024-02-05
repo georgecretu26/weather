@@ -5,19 +5,28 @@ import { getWeatherIconClass } from "@/helpers/get-weather-icon";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import {
   CardWrapperCss,
+  FlagIcon,
   IconCss,
   SectionCss,
 } from "@/components/WeatherCard/WeatherCard.styles";
 import { Row } from "@/components/WeatherCard/Row";
 import { Error, Loading } from "@/components/Shared";
 import { extractTime } from "@/helpers";
+import "flag-icons/";
 
 interface WeatherCardProps {
   lat?: number;
   lon?: number;
+  displayName?: string;
+  countryCode?: string;
 }
 
-const WeatherCard: React.FC<WeatherCardProps> = ({ lat, lon }) => {
+const WeatherCard: React.FC<WeatherCardProps> = ({
+  lat,
+  lon,
+  displayName,
+  countryCode,
+}) => {
   const { data: weatherData, loading, error } = useFetchWeatherData(lat, lon);
 
   const weatherDescription = useMemo(() => {
@@ -35,6 +44,8 @@ const WeatherCard: React.FC<WeatherCardProps> = ({ lat, lon }) => {
       <>
         <SectionCss>
           <IconCss icon={`fa-solid ${weatherIconClass}` as IconProp} />
+          <h3>{displayName}</h3>
+          <FlagIcon className={`fi fi-${countryCode}`}></FlagIcon>
           <Row label={"Current conditions"} value={weatherDescription} />
         </SectionCss>
         <SectionCss>
@@ -74,7 +85,13 @@ const WeatherCard: React.FC<WeatherCardProps> = ({ lat, lon }) => {
         </SectionCss>
       </>
     );
-  }, [weatherData, weatherDescription, weatherIconClass]);
+  }, [
+    countryCode,
+    displayName,
+    weatherData,
+    weatherDescription,
+    weatherIconClass,
+  ]);
 
   if (loading) return <Loading />;
   if (error) return <Error />;

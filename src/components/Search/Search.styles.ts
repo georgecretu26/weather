@@ -12,6 +12,7 @@ export const InputCss = styled.input`
   padding: 10px;
   margin: 10px;
   width: 200px;
+  font-size: 16px;
 `;
 
 export const UnorderedListCss = styled.ul`
