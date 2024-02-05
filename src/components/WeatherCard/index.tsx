@@ -10,6 +10,7 @@ import {
 } from "@/components/WeatherCard/WeatherCard.styles";
 import { Row } from "@/components/WeatherCard/Row";
 import { Error, Loading } from "@/components/Shared";
+import { extractTime } from "@/helpers";
 
 interface WeatherCardProps {
   lat?: number;
@@ -49,16 +50,20 @@ const WeatherCard: React.FC<WeatherCardProps> = ({ lat, lon }) => {
           />
         </SectionCss>
         <SectionCss>
-          <Row
-            label="Sunrise"
-            value={weatherData?.daily.sunrise[0]}
-            extra={weatherData?.timezone_abbreviation}
-          />
-          <Row
-            label="Sunset"
-            value={weatherData?.daily.sunset[0]}
-            extra={weatherData?.timezone_abbreviation}
-          />
+          {weatherData?.daily.sunrise && (
+            <Row
+              label="Sunrise"
+              value={extractTime(weatherData?.daily.sunrise[0])}
+              extra={weatherData?.timezone_abbreviation}
+            />
+          )}
+          {weatherData?.daily.sunset && (
+            <Row
+              label="Sunset"
+              value={extractTime(weatherData?.daily.sunset[0])}
+              extra={weatherData?.timezone_abbreviation}
+            />
+          )}
         </SectionCss>
         <SectionCss>
           <Row
