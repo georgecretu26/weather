@@ -4,6 +4,11 @@ export interface LocationSuggestion {
   display_name: string;
   lat: number;
   lon: number;
+  address: {
+    city?: string;
+    country?: string;
+    country_code?: string;
+  };
 }
 
 export async function fetchSuggestions(

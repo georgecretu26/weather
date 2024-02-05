@@ -39,21 +39,42 @@ interface Props {
 }
 
 const HomePage: React.FC<Props> = ({}) => {
-  const [coords, setCoords] = useState({ lat: null, lon: null });
+  const [location, setLocation] = useState({
+    lat: null,
+    lon: null,
+    displayName: null,
+    countryCode: null,
+  });
 
   return (
     <WrapperCss style={{ textAlign: "center" }}>
       <h1>Weather Dashboard</h1>
-      <SearchLocation onLocationSelected={setCoords} />
-      {coords.lat && coords.lon && (
-        <WeatherCard lat={coords.lat} lon={coords.lon} />
-      )}
+      <Content>
+        <SearchLocation onLocationSelected={setLocation} />
+        {location.lat &&
+          location.lon &&
+          location.displayName &&
+          location.countryCode && (
+            <WeatherCard
+              lat={location.lat}
+              lon={location.lon}
+              displayName={location.displayName}
+              countryCode={location.countryCode}
+            />
+          )}
+      </Content>
     </WrapperCss>
   );
 };
 
 const WrapperCss = styled.div`
   text-align: center;
+`;
+
+const Content = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 `;
 
 export default HomePage;

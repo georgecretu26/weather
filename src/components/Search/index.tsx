@@ -30,6 +30,8 @@ export const SearchLocation: React.FC<SearchLocationProps> = ({
       onLocationSelected({
         lat: location.lat,
         lon: location.lon,
+        displayName: location.display_name,
+        countryCode: location.address.country_code,
       });
       setShowSuggestions(false);
     },
